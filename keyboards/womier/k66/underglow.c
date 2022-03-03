@@ -48,11 +48,11 @@ void i2c_delay(int delay){
 void i2c_init(void){
     // drive strength all gpio A 20ma
     //SN_GPIO0->MODE |= 0xFFFF0000;
-    I2C_SCL_HI;
-    I2C_SDA_HIZ;
     setPinOutput(I2C_SDB);
     writePinHigh(I2C_SDB);
-    i2c_delay(200);
+    I2C_SCL_HI;
+    I2C_SDA_HIZ;
+    i2c_delay(50000); //very lojng delay for I2C LED chip wakeup min 180us, not calculated
 }
 
 void i2c_start(void){
@@ -254,7 +254,6 @@ void init_underglow(uint8_t devid)
     i2c_init();
     //write config Registers as described in SLED1734 pdf (Matrix type3), using writeReg since performance is not important.
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FUNCTION);
-    //i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x00); //set to SW Sleep
     i2c_writeReg(devid, REG_FUNC_CONFIGURATION,      0x00); //SYNC,ADC,PWM
     i2c_writeReg(devid, REG_FUNC_PICTURE_DISPLAY,    0x10); //Matrix Type 3
     i2c_writeReg(devid, REG_FUNC_DISPLAY_OPTION,     0x00); //Blinking Off
@@ -268,16 +267,17 @@ void init_underglow(uint8_t devid)
     i2c_writeReg(devid, REG_FUNC_VAF_1,              68);   //standard 68
     i2c_writeReg(devid, REG_FUNC_VAF_2,              128);  //standard 4, 128 forces VAF with standard settings
     i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x01); //wakeup
-    
+
     //All LEDs ON in Frame1, optional all PWM Channels 255
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FRAME_1);
     i2c_writeBuf(devid, 0x00, state_frame1, 16);
-    //i2c_writeBuf(devid, 0x20, pwm_frame1, 128);
+    //i2c_writeBuf(devid, 0x20, pwm_frame1, 128); //used to set all LEDs to white
 
     //All LEDs ON Frame2, optional all PWM Channels 255
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FRAME_2);
     i2c_writeBuf(devid, 0x00, state_frame2, 8);
-    //i2c_writeBuf(devid, 0x20, pwm_frame2, 64);
+    //i2c_writeBuf(devid, 0x20, pwm_frame2, 64);  //used to set all LEDs to white
+
 
 }
 
