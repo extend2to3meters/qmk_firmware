@@ -40,3 +40,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 {  KC_LCTL,  KC_NO,    KC_NO,    KC_NO,  KC_NO,  RGB_MOD,  KC_NO,  KC_NO,  RESET,    KC_TRNS,  RGB_TOG,  RGB_HUI,  KC_PGDN,  RGB_SAI, }
              }
 };
+
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color(28, RGB_WHITE);
+    }
+}

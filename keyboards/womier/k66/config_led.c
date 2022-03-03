@@ -1,3 +1,6 @@
+// Copyright 2021 https://github.com/fightforlife
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #ifdef RGB_MATRIX_ENABLE
 
 #include "rgb_matrix.h"
@@ -38,8 +41,8 @@ led_config_t g_led_config = { {
 // 66 RGB Matrix LEDs in the keys
      4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
      4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
-     5,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
-     5,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
+     8,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,
+     5,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  5,  4,  4,
      5,  5,  5,          4,          5,  5,  5,  4,  4,  4,
 
 // 43  Underglow LEDs around the keyboard, part of RGB_MATRIX

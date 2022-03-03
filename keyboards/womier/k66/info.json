@@ -1,6 +1,6 @@
 {
     "keyboard_name": "Womier K66 v1", 
-    "url": "https://github.com/fightforlife/qmk_firmware/tree/womier_k66/keyboards/womier/k66", 
+    "url": "https://github.com/SonixQMK/qmk_firmware", 
     "maintainer": "fightforlife", 
     "layouts": {
         "LAYOUT": {

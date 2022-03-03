@@ -1,3 +1,7 @@
+// Copyright 2021 https://github.com/fightforlife
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
