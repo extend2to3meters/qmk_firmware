@@ -254,7 +254,7 @@ void init_underglow(uint8_t devid)
     i2c_init();
     //write config Registers as described in SLED1734 pdf (Matrix type3), using writeReg since performance is not important.
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FUNCTION);
-    i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x00); //set to SW Sleep
+    //i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x00); //set to SW Sleep
     i2c_writeReg(devid, REG_FUNC_CONFIGURATION,      0x00); //SYNC,ADC,PWM
     i2c_writeReg(devid, REG_FUNC_PICTURE_DISPLAY,    0x10); //Matrix Type 3
     i2c_writeReg(devid, REG_FUNC_DISPLAY_OPTION,     0x00); //Blinking Off
@@ -268,7 +268,7 @@ void init_underglow(uint8_t devid)
     i2c_writeReg(devid, REG_FUNC_VAF_1,              68);   //standard 68
     i2c_writeReg(devid, REG_FUNC_VAF_2,              128);  //standard 4, 128 forces VAF with standard settings
     i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x01); //wakeup
-
+    
     //All LEDs ON in Frame1, optional all PWM Channels 255
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FRAME_1);
     i2c_writeBuf(devid, 0x00, state_frame1, 16);

@@ -22,7 +22,6 @@ KEYBOARD_SHARED_EP = no	# not needed, no = better BIOS
 CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared
 RGB_MATRIX_ENABLE = yes		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
-WAIT_FOR_USB = no			# 
 
 USE_EXCEPTIONS_STACKSIZE = 0xFF # reduce RAM usage
 USE_PROCESS_STACKSIZE = 0x200
