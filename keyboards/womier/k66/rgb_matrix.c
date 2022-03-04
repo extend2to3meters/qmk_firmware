@@ -270,24 +270,21 @@ void shared_matrix_rgb_disable_leds(void) {
     }
 }
 void update_pwm_channels(PWMDriver *pwmp) {
-    bool led_changed = false;
     for(uint8_t current_key_row = 0; current_key_row < MATRIX_ROWS; current_key_row++) {
         #if(DIODE_DIRECTION == COL2ROW)
-        // Scan the key matrix row
-        matrix_scan_keys(raw_matrix, current_key_row);
+            matrix_scan_keys(raw_matrix, current_key_row);
         #endif
         uint8_t led_index = g_led_config.matrix_co[current_key_row][current_key_col];
-        // Check if we need to enable RGB output 
         // Update matching RBG channel PWM configuration
-        if (led_state[led_index].g != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+0],led_state[led_index].g);
-        if (led_state[led_index].b != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+1],led_state[led_index].b);
-        if (led_state[led_index].r != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+2],led_state[led_index].r);
+        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+0],led_state[led_index].g);
+        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+1],led_state[led_index].b);
+        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+2],led_state[led_index].r);
         // setting Anode high if needed
-        if (led_state[led_index].r != 0 || led_state[led_index].g != 0 || led_state[led_index].b != 0) led_changed=true;
-    }
-    if (led_changed) {
-        setPinOutput(led_col_pins[current_key_col]);
-        writePinLow(led_col_pins[current_key_col]);
+        if (led_state[led_index].r != 0 || led_state[led_index].g != 0 || led_state[led_index].b != 0) 
+        {
+            setPinOutput(led_col_pins[current_key_col]);
+            writePinLow(led_col_pins[current_key_col]);
+        }
     }
 }
 
@@ -301,19 +298,16 @@ void rgb_callback(PWMDriver *pwmp) {
     // Disable LED output before scanning the key matrix
     shared_matrix_rgb_disable_leds();
     shared_matrix_rgb_disable_pwm();
-#if(DIODE_DIRECTION == ROW2COL)
-    // Scan the key matrix column
-    matrix_scan_keys(raw_matrix,current_key_col);
-#endif
+    #if(DIODE_DIRECTION == ROW2COL)
+        // Scan the key matrix column
+        matrix_scan_keys(raw_matrix,current_key_col);
+    #endif
     update_pwm_channels(pwmp);
-    
     chSysUnlockFromISR();
     // Advance the timer to just before the wrap-around, that will start a new PWM cycle
     pwm_lld_change_counter(pwmp, 0xFFFF);
     // Enable the interrupt
     pwmEnablePeriodicNotification(pwmp);
-    
-
 }
 
 void init(void) {
@@ -344,6 +338,8 @@ void set_color_all(uint8_t r, uint8_t g, uint8_t b) {
         set_color(i, r, g, b);
     }
 }
+
+
 static void flush(void) {
 }
 

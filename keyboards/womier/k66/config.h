@@ -84,7 +84,7 @@
 
 //RGB Settings
 #define RGB_DISABLE_WHEN_USB_SUSPENDED /* rgb off when power off / suspend */
-#define RGB_MATRIX_LED_PROCESS_LIMIT 1 // Fix for flickering LED indicators (like Capslock or layer)
+//#define RGB_MATRIX_LED_PROCESS_LIMIT 1 // temporary fix for flickering LED indicators (like Capslock or layer)
 
 /* 
  * Optimization
