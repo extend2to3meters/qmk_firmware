@@ -23,8 +23,8 @@ CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared
 RGB_MATRIX_ENABLE = yes		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
 
-USE_EXCEPTIONS_STACKSIZE = 0xFF # reduce RAM usage
-USE_PROCESS_STACKSIZE = 0x200
+USE_EXCEPTIONS_STACKSIZE = 0xC0
+USE_PROCESS_STACKSIZE = 0x170
 
 #USE_EXCEPTIONS_STACKSIZE = 0xFF # reduce RAM usage
 #USE_PROCESS_STACKSIZE = 0x200

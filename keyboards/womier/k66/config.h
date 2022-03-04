@@ -22,15 +22,10 @@
 #define MATRIX_ROW_PINS {B1, B2, B3, B4, B5}
 #define MATRIX_COL_PINS {D1, D2, D3, D4, D5, D6, D7, D8, C3, C4, C5, C6, C7, C8}
 
-
-/* 
- * Feature
- */
+//Features
 #define USB_POLLING_INTERVAL_MS 1           /* 1000 Hz */
 #define FORCE_NKRO                          /* default NRKO enabled */
 #define DEBOUNCE 1                          /* Debounce time in ms */
-// #define VIA_OPENRGB_HYBRID
-// #define USE_FRAMEBUFFER
 
 // RGB Matrix Effects
 #define ENABLE_RGB_MATRIX_ALPHAS_MODS
@@ -62,7 +57,7 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
 
-//Framebuffer Effects
+//Framebuffer Effects  Space problems
 //#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 //#define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 //#define ENABLE_RGB_MATRIX_DIGITAL_RAIN
@@ -84,18 +79,13 @@
 
 //RGB Settings
 #define RGB_DISABLE_WHEN_USB_SUSPENDED /* rgb off when power off / suspend */
-#define RGB_MATRIX_LED_PROCESS_LIMIT 1 // 1 for temporary fix for flickering LED indicators (like Capslock or layer) (reduces scan rate to 200Hz)
+#define RGB_MATRIX_LED_PROCESS_LIMIT 1 // 1 for temporary fix for flickering LED indicators (like Capslock or layer), tested.
  
-/* 
- * Optimization
- */
+// Optimization
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define LAYER_STATE_8BIT
-#define DYNAMIC_KEYMAP_LAYER_COUNT 4
-#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 1200
 #define NO_DEBUG 1
 #define NO_PRINT 1
-//#define OPENRGB_DIRECT_MODE_UNBUFFERED  /* use unbuffered direct mode in OpenRGB protocol */
 
 #include "config_led.h"
