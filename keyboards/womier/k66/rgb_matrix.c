@@ -43,7 +43,7 @@ static const uint32_t periodticks = 200; //PWM ticks original 256
 static const uint32_t freq = periodticks*12; //pwm timer frequency 
 static const pin_t led_row_pins[LED_MATRIX_ROWS_HW] = LED_MATRIX_ROW_PINS; // We expect a RGB order here
 static const pin_t led_col_pins[LED_MATRIX_COLS] = LED_MATRIX_COL_PINS;
-RGB led_state[DRIVER_LED_TOTAL]; // led state buffer
+RGB led_state[MATRIX_LED_TOTAL]; // led state buffer for RGB Matrix. Underglow set directly
 
 
 

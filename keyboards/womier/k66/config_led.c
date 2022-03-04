@@ -9,8 +9,7 @@
 /// Force g_led_config into flash, because there is no space in RAM.
 /// This should be safe because g_led_config should never be written to.
 /// We cannot make g_led_config const, because rgb_matrix.h, exports it as mutable.
-__attribute__(( section(".rodata.g_led_config") ))
-led_config_t g_led_config = { {
+__attribute__(( section(".rodata.g_led_config") )) led_config_t g_led_config = { {
 
 // 66 RGB Matrix LEDs in the keys
 /*  0       1       2       3       4       5       6       7       8      9     10     11    12     13     */
