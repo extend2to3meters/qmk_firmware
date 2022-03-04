@@ -276,9 +276,9 @@ void update_pwm_channels(PWMDriver *pwmp) {
         #endif
         uint8_t led_index = g_led_config.matrix_co[current_key_row][current_key_col];
         // Update matching RBG channel PWM configuration
-        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+0],led_state[led_index].g);
-        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+1],led_state[led_index].b);
-        pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+2],led_state[led_index].r);
+        if (led_state[led_index].g != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+0],led_state[led_index].g);
+        if (led_state[led_index].b != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+1],led_state[led_index].b);
+        if (led_state[led_index].r != 0) pwmEnableChannelI(pwmp,chan_row_order[(current_key_row*3)+2],led_state[led_index].r);
         // setting Anode high if needed
         if (led_state[led_index].r != 0 || led_state[led_index].g != 0 || led_state[led_index].b != 0) 
         {
