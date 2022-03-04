@@ -43,9 +43,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-void rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   
-    if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK) && led_min <= 28 && led_max >= 28) {
+    if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
         rgb_matrix_set_color(28, 255,255,255);
     }
 
