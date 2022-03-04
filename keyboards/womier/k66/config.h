@@ -81,11 +81,11 @@
 #define RGB_DISABLE_WHEN_USB_SUSPENDED /* rgb off when power off / suspend */
 #define RGB_MATRIX_LED_PROCESS_LIMIT 1 // 1 for temporary fix for flickering LED indicators (like Capslock or layer), tested.
  
-// Optimization
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-#define LAYER_STATE_8BIT
-#define NO_DEBUG 1
-#define NO_PRINT 1
+// Optimization, currently not needed
+//#define NO_ACTION_MACRO
+//#define NO_ACTION_FUNCTION
+//#define LAYER_STATE_8BIT
+//#define NO_DEBUG
+//#define NO_PRINT
 
 #include "config_led.h"
