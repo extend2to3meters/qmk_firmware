@@ -36,9 +36,8 @@
  * according to the spec, high SCL peroid 0.7us, low SCL peroid 1.3us
  *
  * i2c_delay 1 loop about 7 cycles. Under 48MHz, the actual delay is around 0.9us and 1.5us respectively.
+ * reduced this from 2 to 1 on Womier K66. No problems in testing.
  */
-
- //reduces this from 2 to 1 on Womier K66. No problems in testing.
 #define I2C_DELAY           i2c_delay(1)
 
 

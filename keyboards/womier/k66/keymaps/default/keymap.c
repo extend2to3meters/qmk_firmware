@@ -31,11 +31,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-  
+    // show Capslock
     if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
         rgb_matrix_set_color(28, 255,255,255);
     }
 
+    //show special keys in second layer
     if (get_highest_layer(layer_state) > 0 ) {
         uint8_t layer = get_highest_layer(layer_state);
 
