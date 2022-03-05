@@ -4,15 +4,15 @@
 https://user-images.githubusercontent.com/5511687/156899040-eb86424e-6cbe-459c-ba1b-005fee8d5d4c.mp4
 
 
-A compact 60% leyboard for RGB freaks with 66 keys/LEDs and 43 underglow LEDs in a clear housing.
+A compact 60% leyboard for RGB freaks with 66 keys/LEDs and 43 underglow LEDs in a acrylic housing.
 Brought to you by: https://github.com/SonixQMK/qmk_firmware
 
-Currently only version 1 is supported. it has an VS11K16A MCU and VS12L03A I2C LED driver.\
+Currently only hardware version 1 is supported.It has an VS11K16A MCU and VS12L03A I2C LED driver.\
 Version 1 can be distinguished by the size of the chips on the backside of the board. There should be one square (MCU) and one rectangular (LED) chip.
 
-Make example for this keyboard (after setting up your build environment):
-`make womier/k66:default`
-or
+Make example for this keyboard (after setting up your build environment):\
+`make womier/k66:default`\
+or\
 `qmk compile -kb womier/k66 -km default`
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
@@ -38,6 +38,7 @@ KLE Layout here: [http://www.keyboard-layout-editor.com](http://www.keyboard-lay
 
 example circuit diagram
 https://www.circuit-diagram.org/circuits/544944b664534461bac3e757aab00fd8
+![544944b664534461bac3e757aab00fd8](https://user-images.githubusercontent.com/5511687/156899330-f528e468-ec4c-4179-8ca8-3bb4632ecffd.svg)
 
 ## VS11K16A / SN32F268F MCU
 ### Pinning
