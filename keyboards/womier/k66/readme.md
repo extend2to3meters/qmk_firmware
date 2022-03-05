@@ -13,7 +13,7 @@ or
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
-KLE Layout here: http://www.keyboard-layout-editor.com/#/gists/8ddceb2e7bdef2bfa16d6c0825257358
+KLE Layout here: [http://www.keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/##@_name=Womier%20K66%20v1&author=fightforlife%3B&@_a:3%3B&=Esc%0A%0A%0A%0A%60%0A%0A%0A%0A%0A%0A%0A~&_a:7%3B&=1%20!%0A%0A%0A%0AF1&=2%20%2F@%0A%0A%0A%0AF2&=3%20%23%0A%0A%0A%0AF3&=4%20$%0A%0A%0A%0AF4&=5%20%25%0A%0A%0A%0AF5&=6%20%5E%0A%0A%0A%0AF6&=7%20%2F&%0A%0A%0A%0AF7&=8%20*%0A%0A%0A%0AF8&=9%20(%0A%0A%0A%0AF9&=0%20)%0A%0A%0A%0AF10&=-%20%2F_%0A%0A%0A%0AF11&=%2F=%20+%0A%0A%0A%0AF12&_w:2%3B&=Backspace&_x:0.25%3B&=Insert%0A%0A%0A%0A+%3B&@_w:1.5%3B&=Tab&=Q&=W&=E&=R&=T&=Y&=U&=I&=O&=P&=%5B%20%7B&=%5D%20%7D&_w:1.5%3B&=%5C%20%20%7C&_x:0.25%3B&=Delete%0A%0A%0A%0A-%3B&@_w:1.75%3B&=Capslock&=A&=S&=D&=F&=g&=H&=J&=K&=L&=%2F%3B%20%2F:&='%20%22&_w:2.25%3B&=Enter%3B&@_w:2.25%3B&=Shift&=Z&=X&=C&=V&=B&=N&=M&=,%20%3C&=.%20%3E&=%2F%2F%20%3F&_w:2%3B&=Shift&=%E2%86%91%0A%0A%0A%0APgUp%3B&@_w:1.25%3B&=Ctrl%0A%0A%0A%0Ai&=Win&_w:1.25%3B&=Alt%0A%0A%0A%0Ai&_w:6.25%3B&=&_w:1.25%3B&=Alt&=Fn&_w:1.25%3B&=Ctrl%0A%0A%0A%0Ai&=%E2%86%90%0A%0A%0A%0A+&=%E2%86%93%0A%0A%0A%0APgDo&=%E2%86%92%0A%0A%0A%0A-)
 
 ### How to get QMK working on the Womier K66 v1:
 1. Check if you have the correct version 1 of the board by checking the chips on the underside of the board
