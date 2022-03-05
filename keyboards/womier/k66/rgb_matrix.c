@@ -39,8 +39,10 @@
 static uint8_t chan_row_order[LED_MATRIX_ROWS_HW] = {0}; // track the channel row order for PWM
 static uint8_t current_key_col = 0; // current key col, scanner
 extern matrix_row_t raw_matrix[MATRIX_ROWS]; //raw values
-static const uint32_t periodticks = 200; //PWM ticks original 256
-static const uint32_t freq = periodticks*12; //pwm timer frequency 
+/*PWM ticks for a full period, PWM colors from 0-255*/
+static const uint32_t periodticks = 256;
+/* PWM Timer clock in Hz. Can be quite low, since we are manually advancing timer after successfull scan. Here 0,25s */
+static const uint32_t freq = periodticks*4;
 static const pin_t led_row_pins[LED_MATRIX_ROWS_HW] = LED_MATRIX_ROW_PINS; // We expect a RGB order here
 static const pin_t led_col_pins[LED_MATRIX_COLS] = LED_MATRIX_COL_PINS;
 RGB led_state[MATRIX_LED_TOTAL]; // led state buffer
