@@ -19,12 +19,11 @@ CONSOLE_ENABLE = no     	# Console for debug
 COMMAND_ENABLE = no     	# Commands for debug and configuration
 NKRO_ENABLE = yes        	# USB Nkey Rollover
 KEYBOARD_SHARED_EP = no		# not needed, no = better BIOS support
-CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared
+CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared with LED ON/OFF
 RGB_MATRIX_ENABLE = yes		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
 
-USE_EXCEPTIONS_STACKSIZE = 0xC0
-USE_PROCESS_STACKSIZE = 0x170
-
-#USE_EXCEPTIONS_STACKSIZE = 0xFF # reduce RAM usage
-#USE_PROCESS_STACKSIZE = 0x200
+USE_EXCEPTIONS_STACKSIZE = 0xD0
+USE_PROCESS_STACKSIZE = 0x190
+# 0C0 lowest possible atm, 0xFF stable
+# 0x170 lowest possible atm, 0x200 stable
