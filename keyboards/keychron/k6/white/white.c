@@ -17,7 +17,7 @@
 
 void suspend_power_down_kb(void) {
     // Suspend backlight
-    rgb_matrix_set_suspend_state(true);
+    led_matrix_set_suspend_state(true);
 
     suspend_power_down_user();
 }
@@ -27,7 +27,7 @@ void suspend_power_down_kb(void) {
 /// A workaround is to use housekeeping_task_kb() instead.
 void housekeeping_task_kb(void) {
     // Restore backlight
-    rgb_matrix_set_suspend_state(false);
+    led_matrix_set_suspend_state(false);
 
     housekeeping_task_user();
 }
