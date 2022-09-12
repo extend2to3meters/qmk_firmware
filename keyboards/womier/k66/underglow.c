@@ -34,23 +34,18 @@
 
 /*
  * according to the spec, high SCL peroid 0.7us, low SCL peroid 1.3us
- *
  * i2c_delay 1 loop about 7 cycles. Under 48MHz, the actual delay is around 0.9us and 1.5us respectively.
- * reduced this from 2 to 1 on Womier K66. No problems in testing.
+ * Reduced this from 2 to 1 on Womier K66. No problems in testing.
  */
 #define I2C_DELAY           i2c_delay(1)
 
 
 void i2c_delay(int delay){
-    // #pragma GCC unroll 0
     for (int32_t i = 0; i < delay; i++)
         __NOP();
-        // SN_WDT->FEED = 0x5AFA55AA;
 }
 
 void i2c_init(void){
-    // drive strength all gpio A 20ma
-    //SN_GPIO0->MODE |= 0xFFFF0000;
     setPinOutput(I2C_SDB);
     writePinHigh(I2C_SDB);
     I2C_SCL_HI;
@@ -62,47 +57,44 @@ void i2c_start(void){
     /* I2C Start condition, data line goes low when clock is high */
     /* START */
     I2C_SDA_LO;
-    I2C_DELAY;
+    I2C_DELAY; //needed in testing!
     I2C_SCL_LO;
-    I2C_DELAY;
+    //I2C_DELAY; (not needed in testing)
 }
 
 void i2c_stop(void)
 {
     /* I2C Stop condition, clock goes high when data is low */
     I2C_SDA_LO;
-    I2C_DELAY;
+    //I2C_DELAY; (not needed in testing)
 
     /* STOP */
     I2C_SCL_HI;
-    I2C_DELAY;
+    //I2C_DELAY; (not needed in testing)
     I2C_SDA_HIZ;
 
-    I2C_DELAY;
-    I2C_DELAY;
+    //I2C_DELAY; (not needed in testing)
+    //I2C_DELAY;
 }
 
 bool i2c_sendByte(uint8_t data){       // Send a byte over I2C
     for(uint8_t i = 0; i < 8; i++)          // 8 bits, so 8 loops
-    { 
+    {
         if((0x80 >> i) & data) I2C_SDA_HI;               // Check if i bit to be sent is a 1 or 0  // It's a 1, so send a logic HIGH
         else I2C_SDA_LO;                       // It's a 0, so just pretend we need send a 0 for completion
-        //i2c_delay(DELAY);
         //Generate Clock for data bits
         I2C_SCL_HI;
-        I2C_DELAY;
+        I2C_DELAY; //needed
         I2C_SCL_LO;
-        I2C_DELAY;
+        //I2C_DELAY; (not needed in testing)
     }
     // Tick Signal that we sent the logic
-    I2C_SDA_HIZ; //setPinInput(I2C_SDA);
+    I2C_SDA_HIZ;
     I2C_SCL_HI;
-    I2C_DELAY;
+    I2C_DELAY; //needed
     bool ack = !I2C_SDA_IN;
     I2C_SCL_LO;
-    I2C_DELAY;
-    //if(ack)set_color_all(0,255,0);
-    //else set_color_all(255,0,0);
+    //I2C_DELAY; (not needed in testing)
     return ack;
 }
 
@@ -111,7 +103,7 @@ void i2c_writeReg(uint8_t adr, uint8_t reg, const uint8_t data){
     i2c_sendByte(adr);
     i2c_sendByte(reg);
     i2c_sendByte(data);
-    i2c_stop(); 
+    i2c_stop();
 }
 
 void i2c_writeBuf(uint8_t adr, uint8_t reg, const uint8_t *data, uint8_t len){
@@ -121,9 +113,10 @@ void i2c_writeBuf(uint8_t adr, uint8_t reg, const uint8_t *data, uint8_t len){
     for(int i=0; i<len; i++){
         i2c_sendByte(data[i]);
     }
-    i2c_stop(); 
+    i2c_stop();
 }
 
+//List of Configuration registers
 enum{
     REG_FUNC_CONFIGURATION      = 0x00,
     REG_FUNC_PICTURE_DISPLAY    = 0x01,
@@ -144,6 +137,7 @@ enum{
     REG_FUNC_THERMAL_DETECTION  = 0x17,
 };
 
+//list of LED registers
 enum{
     REG_CONFIGURE_COMMAND       = 0xFD,
     PAGE_FRAME_1                = 0x00,
@@ -172,7 +166,7 @@ const uint8_t PROGMEM state_frame2[8] = {
     0b00111111, 0b11111110, //CA9 G
 
     0b00000000, 0b01110001, //CB1 R
-    0b00000000, 0b01110001, //CB2 B 
+    0b00000000, 0b01110001, //CB2 B
     0b00000000, 0b01110001, //CB3 G
 };
 
@@ -196,14 +190,14 @@ const uint8_t PROGMEM led_map[UNDERGLOW_LED_TOTAL][4] = {
     { 0x51, 0x61, 0x71, PAGE_FRAME_1}, //15
     { 0x50, 0x60, 0x70, PAGE_FRAME_1},
     { 0x8F, 0x9F, 0x2F, PAGE_FRAME_SPLIT},
-    { 0x8E, 0x9E, 0x2E, PAGE_FRAME_SPLIT}, 
-    { 0x8D, 0x9D, 0x2D, PAGE_FRAME_SPLIT}, 
+    { 0x8E, 0x9E, 0x2E, PAGE_FRAME_SPLIT},
+    { 0x8D, 0x9D, 0x2D, PAGE_FRAME_SPLIT},
     { 0x8C, 0x9C, 0x2C, PAGE_FRAME_SPLIT}, //20
-    { 0x8B, 0x9B, 0x2B, PAGE_FRAME_SPLIT}, 
-    { 0x8A, 0x9A, 0x2A, PAGE_FRAME_SPLIT}, 
-    { 0x89, 0x99, 0x29, PAGE_FRAME_SPLIT}, 
-    { 0x85, 0x95, 0x25, PAGE_FRAME_SPLIT}, 
-    { 0x84, 0x94, 0x24, PAGE_FRAME_SPLIT}, //25 
+    { 0x8B, 0x9B, 0x2B, PAGE_FRAME_SPLIT},
+    { 0x8A, 0x9A, 0x2A, PAGE_FRAME_SPLIT},
+    { 0x89, 0x99, 0x29, PAGE_FRAME_SPLIT},
+    { 0x85, 0x95, 0x25, PAGE_FRAME_SPLIT},
+    { 0x84, 0x94, 0x24, PAGE_FRAME_SPLIT}, //25
     { 0x83, 0x93, 0x23, PAGE_FRAME_SPLIT},
     { 0x82, 0x92, 0x22, PAGE_FRAME_SPLIT},
     { 0x81, 0x91, 0x21, PAGE_FRAME_SPLIT},
@@ -246,8 +240,8 @@ void set_i2c_color_direct(uint8_t index, uint8_t r, uint8_t g, uint8_t b){
             i2c_writeReg(UNDERGLOW_I2C_ADR, REG_CONFIGURE_COMMAND, PAGE_FRAME_2);
             i2c_writeReg(UNDERGLOW_I2C_ADR, led_map[underglow_index][0], r);
             i2c_writeReg(UNDERGLOW_I2C_ADR, led_map[underglow_index][1], b);
-            i2c_writeReg(UNDERGLOW_I2C_ADR, led_map[underglow_index][2], g);  
-            break; 
+            i2c_writeReg(UNDERGLOW_I2C_ADR, led_map[underglow_index][2], g);
+            break;
     }
 }
 
@@ -255,74 +249,34 @@ void init_underglow(uint8_t devid)
 {
     // initialise I2C
     i2c_init();
-    //write config Registers as described in SLED1734 pdf (Matrix type3), using writeReg since performance is not important.
+    //write config Registers as described in SLED1734 pdf (Matrix type3), using writeReg func since performance is not important. (page 82, middle, 86-)
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FUNCTION);
-    i2c_writeReg(devid, REG_FUNC_CONFIGURATION,      0x00); //SYNC,ADC,PWM
-    i2c_writeReg(devid, REG_FUNC_PICTURE_DISPLAY,    0x10); //Matrix Type 3
-    i2c_writeReg(devid, REG_FUNC_DISPLAY_OPTION,     0x00); //Blinking Off
-    i2c_writeReg(devid, REG_FUNC_AUDIO_SYNC,         0x00); //Audio Off
-    i2c_writeReg(devid, REG_FUNC_BREATH_CONTROL_1,   0x00); //Disable
-    i2c_writeReg(devid, REG_FUNC_BREATH_CONTROL_2,   0x00); //Disable
-    i2c_writeReg(devid, REG_FUNC_AUDIO_GAIN_CONTROL, 0x00); //Disable
-    i2c_writeReg(devid, REG_FUNC_STAGGERED_DELAY,    0x0F); //standard is 0x00, 0x0F sets STD2&1 to max delay
-    i2c_writeReg(devid, REG_FUNC_SLEW_RATE_CONTROL,  0x01); //Enable
-    i2c_writeReg(devid, REG_FUNC_CURRENT_CONTROL,    191);  //max 191, default 49
-    i2c_writeReg(devid, REG_FUNC_VAF_1,              68);   //standard 68
-    i2c_writeReg(devid, REG_FUNC_VAF_2,              128);  //standard 4, 128 forces VAF with standard settings
+    i2c_writeReg(devid, REG_FUNC_CONFIGURATION,      0x00); //SYNC High Impedance 00, ADC disable 0, PWM enable 0 (00000000)
+    i2c_writeReg(devid, REG_FUNC_PICTURE_DISPLAY,    0x10); //Matrix Type 3, (00010000)
+    i2c_writeReg(devid, REG_FUNC_DISPLAY_OPTION,     0x00); //Blinking Off (00000000)
+    i2c_writeReg(devid, REG_FUNC_AUDIO_SYNC,         0x00); //Audio Off (00000000)
+    i2c_writeReg(devid, REG_FUNC_BREATH_CONTROL_1,   0x00); //Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_BREATH_CONTROL_2,   0x00); //Disable (00000000)
+    //REG_FUNC_SHUTDOWN (10)will set at the end
+    i2c_writeReg(devid, REG_FUNC_AUDIO_GAIN_CONTROL, 0x00); //Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_STAGGERED_DELAY,    0x00); //Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_SLEW_RATE_CONTROL,  0x01); //Enable (00000001)
+    i2c_writeReg(devid, REG_FUNC_CURRENT_CONTROL,    0xB0); //Default Disabled (00110001,0x31,8mA), Max (10111111,0xBF,39.5mA), Choosen(10110000,0x30,32mA)
+    i2c_writeReg(devid, REG_FUNC_OPEN_SHORT_TEST_1,  0x00); //Default Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_OPEN_SHORT_TEST_2,  0x00); //Default Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_ADC_OUTPUT,         0x00); //Default Disable (00000000)
+    i2c_writeReg(devid, REG_FUNC_VAF_1,              0x44); //Default (01000100)
+    i2c_writeReg(devid, REG_FUNC_VAF_2,              0x04); //Default (00000100)
     i2c_writeReg(devid, REG_FUNC_SHUTDOWN,           0x01); //wakeup
 
-    //All LEDs ON in Frame1, optional all PWM Channels 255
+    //All LEDs ON in Frame1, not PWM
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FRAME_1);
     i2c_writeBuf(devid, 0x00, state_frame1, 16);
-    //i2c_writeBuf(devid, 0x20, pwm_frame1, 128); //used to set all LEDs to white
 
-    //All LEDs ON Frame2, optional all PWM Channels 255
+    //All LEDs ON Frame2, not PWM
     i2c_writeReg(devid, REG_CONFIGURE_COMMAND,       PAGE_FRAME_2);
     i2c_writeBuf(devid, 0x00, state_frame2, 8);
-    //i2c_writeBuf(devid, 0x20, pwm_frame2, 64);  //used to set all LEDs to white
 
 
 }
-
-
-
-
-
-
-// Not needed but good for documentation
-//List of PWM channels used, and set to 255 on Womier K66
-// const uint8_t PROGMEM pwm_frame1[128] = {
-//     0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-//     0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-//     0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 
-
-//     0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-//     0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,  
-//     0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,  
-
-//     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-//     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
-// };
-
-// const uint8_t PROGMEM pwm_frame2[64] = {
-//     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-
-//     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00,
-//     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00,
-//     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0x00
-// };
-
-
-
-// const uint8_t PROGMEM pwm_map_1[48] = {
-//     0, 0, 0, 3, 2, 1, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, //CA1 R //CA2 B //CA3 G
-//     16, 15, 14, 0, 0, 0, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, //CA4 R //CA5 B //CA6 G
-//     29, 28, 27, 26, 25, 24, 0, 0, 0, 23, 22, 21, 20, 19, 18, 17 //CA7 R //CA8 B
-// };
-
-// const uint8_t PROGMEM pwm_map_2[32] = {
-//     29, 28, 27, 26, 25, 24, 0, 0, 0, 23, 22, 21, 20, 19, 18, 17, //CA9 G
-//     0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 33, 32, 31, 0 //CB1 R //CB2 B //CB3 G
-
-// };
 

@@ -26,7 +26,7 @@
 #define USB_POLLING_INTERVAL_MS 1           /* 1000 Hz */
 #define FORCE_NKRO                          /* default NRKO enabled */
 #define DEBOUNCE 1                          /* Debounce time in ms */
-#define MATRIX_KEY_SAMPLE_DELAY 0           /* introduced with 100 there: https://github.com/SonixQMK/qmk_firmware/issues/157, 
+#define MATRIX_KEY_SAMPLE_DELAY 0           /* introduced with 100 there: https://github.com/SonixQMK/qmk_firmware/issues/157,
                                                 not needed on Womier K66, faster scanning */
 
 // RGB Matrix Effects
@@ -82,12 +82,6 @@
 //RGB Settings
 #define RGB_DISABLE_WHEN_USB_SUSPENDED /* rgb off when power off / suspend */
 #define RGB_MATRIX_LED_PROCESS_LIMIT 1 // 1 for temporary fix for flickering LED indicators (like Capslock or layer), tested.
- 
-// Optimization, currently not needed
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
-//#define LAYER_STATE_8BIT
-//#define NO_DEBUG
-//#define NO_PRINT
+#define RGB_MATRIX_LED_FLUSH_LIMIT 16 //16ms is 60HZ
 
 #include "config_led.h"
