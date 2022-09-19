@@ -27,7 +27,9 @@
 #define FORCE_NKRO                          /* default NRKO enabled */
 #define DEBOUNCE 3                          /* Debounce time in ms */
 #define MATRIX_KEY_SAMPLE_DELAY 0           /* introduced with 100 there: https://github.com/SonixQMK/qmk_firmware/issues/157,
-                                                not needed on Womier K66, faster scanning */
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE                                                not needed on Womier K66, faster scanning */
+#define LAYER_STATE_8BIT
 
 // RGB Matrix Effects
 #define ENABLE_RGB_MATRIX_ALPHAS_MODS
@@ -82,6 +84,6 @@
 //RGB Settings
 #define RGB_DISABLE_WHEN_USB_SUSPENDED /* rgb off when power off / suspend */
 #define RGB_MATRIX_LED_PROCESS_LIMIT 1 // 1 for temporary fix for flickering LED indicators (like Capslock or layer), tested.
-#define RGB_MATRIX_LED_FLUSH_LIMIT 16 //16ms is 60HZ
+#define RGB_MATRIX_LED_FLUSH_LIMIT 16 //16ms is 60HZ, not needed since we are not flusing at all.
 
 #include "config_led.h"
