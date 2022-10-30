@@ -1,9 +1,9 @@
 # project specific files
-SRC = ../../../drivers/led/sn32/matrix_sn32f24xx.c
-SRC += rgb_matrix.c #RGB Matrix driver
-SRC += config_led.c #LED Matrix config
-SRC += underglow.c  #to control underglow LEDs via I2C
-SRC += rand.c		#replace rand() with something smaller
+# SRC = ../../../drivers/led/sn32/matrix_sn32f24xx.c
+# SRC += rgb_matrix.c #RGB Matrix driver
+# SRC += config_led.c #LED Matrix config
+# SRC += underglow.c  #to control underglow LEDs via I2C
+# SRC += rand.c		#replace rand() with something smaller
 
 # MCU name
 MCU = SN32F268F
@@ -24,9 +24,9 @@ NKRO_ENABLE = yes        	# USB Nkey Rollover
 KEYBOARD_SHARED_EP = no		# not needed, no = better BIOS support
 AVR_USE_MINIMAL_PRINTF = yes
 CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared with LED ON/OFF
-RGB_MATRIX_ENABLE = yes		# use RGB Matrix
+RGB_MATRIX_ENABLE = no		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
-# DEBOUNCE_TYPE = sym_eager_pk
+DEBOUNCE_TYPE = sym_eager_pk
 
 USE_EXCEPTIONS_STACKSIZE = 0xD0
 USE_PROCESS_STACKSIZE = 0x190

@@ -30,7 +30,8 @@
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE                                                not needed on Womier K66, faster scanning */
 #define LAYER_STATE_8BIT
-#define QMK_KEYS_PER_SCAN 12
+#define QMK_KEYS_PER_SCAN 12 
+#define CH_CFG_USE_MEMCORE TRUE
 
 // RGB Matrix Effects
 #define ENABLE_RGB_MATRIX_ALPHAS_MODS
