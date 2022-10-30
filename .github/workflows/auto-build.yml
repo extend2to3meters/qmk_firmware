@@ -3,11 +3,7 @@ name: Compile Firmware
 on:
   push:
     branches:
-    - sn32_master
-  pull_request:
-    branches:
-    - sn32_master
-
+    - womier_k66
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -21,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: pip3 install -r requirements.txt
     - name: Build Sonix keyboards
-      run:  python3 lib/python/build_all.py
+      run:  python3 lib/python/build_all.py --whitelist womier/k66
     - name: Declare some variables
       id: vars
       shell: bash
