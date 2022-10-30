@@ -13,8 +13,8 @@ MCU = SN32F268F
 #   comment out to disable the options.
 #
 LTO_ENABLE = yes			# reduces firmware size
-MAGIC_ENABLE = yes			# enable magic, can be disabled to reduce size
-SPACE_CADET_ENABLE = yes
+MAGIC_ENABLE = no			# enable magic, can be disabled to reduce size
+SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = yes
 MOUSEKEY_ENABLE = no    	# Mouse keys
 EXTRAKEY_ENABLE = yes   	# Audio control and System control
@@ -26,6 +26,7 @@ AVR_USE_MINIMAL_PRINTF = yes
 CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared with LED ON/OFF
 RGB_MATRIX_ENABLE = yes		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
+DEBOUNCE_TYPE = sym_eager_pk
 
 USE_EXCEPTIONS_STACKSIZE = 0xD0
 USE_PROCESS_STACKSIZE = 0x190
