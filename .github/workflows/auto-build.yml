@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: pip3 install -r requirements.txt
     - name: Build Sonix keyboards
-      run:  python3 lib/python/build_all.py --whitelist womier/k66
+      run: make womier/k66:default
     - name: Declare some variables
       id: vars
       shell: bash
