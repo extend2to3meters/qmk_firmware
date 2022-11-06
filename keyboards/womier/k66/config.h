@@ -25,13 +25,14 @@
 //Features
 #define USB_POLLING_INTERVAL_MS 1           /* 1000 Hz */
 #define FORCE_NKRO                          /* default NRKO enabled */
-#define DEBOUNCE 3                          /* Debounce time in ms */
+#define DEBOUNCE 5                          /* Debounce time in ms */
 #define MATRIX_KEY_SAMPLE_DELAY 0           /* introduced with 100 there: https://github.com/SonixQMK/qmk_firmware/issues/157,
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE                                                not needed on Womier K66, faster scanning */
 #define LAYER_STATE_8BIT
 #define QMK_KEYS_PER_SCAN 12 
 #define CH_CFG_USE_MEMCORE TRUE
+#define CH_CFG_ST_FREQUENCY 1000
 
 // RGB Matrix Effects
 #define ENABLE_RGB_MATRIX_ALPHAS_MODS
