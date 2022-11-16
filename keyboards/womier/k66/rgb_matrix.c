@@ -313,7 +313,6 @@ void rgb_callback(PWMDriver *pwmp) {
 }
 
 void init(void) {
-    init_underglow(UNDERGLOW_I2C_ADR);
     for (uint8_t x = 0; x < LED_MATRIX_COLS; x++) {
         setPinOutput(led_col_pins[x]);
         writePinHigh(led_col_pins[x]);
@@ -329,9 +328,6 @@ void set_color(int index, uint8_t r, uint8_t g, uint8_t b) {
         led_state[index].r = r;
         led_state[index].g = g;
         led_state[index].b = b;
-     }else{
-         // user I2C underglow when LED not in key matrix
-         set_i2c_color_direct(index, r, g, b);
      }
 }
 
