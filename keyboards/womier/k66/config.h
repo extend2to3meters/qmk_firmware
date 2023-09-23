@@ -30,7 +30,7 @@
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE                                                not needed on Womier K66, faster scanning */
 #define LAYER_STATE_8BIT
-#define QMK_KEYS_PER_SCAN 4
+// #define QMK_KEYS_PER_SCAN 4
 #define CH_CFG_USE_MEMCORE TRUE
 #define CH_CFG_ST_FREQUENCY 1000
 #define PREVENT_STUCK_MODIFIERS
