@@ -26,7 +26,7 @@ AVR_USE_MINIMAL_PRINTF = yes
 CUSTOM_MATRIX = yes			# custom key matrix driver, since COLs are shared with LED ON/OFF
 RGB_MATRIX_ENABLE = yes		# use RGB Matrix
 RGB_MATRIX_DRIVER = custom  # use LED custom driver, since COLs are shared
-DEBOUNCE_TYPE = sym_eager_pk
+DEBOUNCE_TYPE = asym_eager_defer_pk
 
 USE_EXCEPTIONS_STACKSIZE = 0xD0
 USE_PROCESS_STACKSIZE = 0x190
